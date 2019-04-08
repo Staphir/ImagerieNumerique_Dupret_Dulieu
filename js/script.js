@@ -25,8 +25,21 @@ lumierePonctuelle.intensity = 0.5;
 scene.add( lumierePonctuelle );
 
 let boutonCreerOBJ = document.getElementById("boutonCreerOBJ");
+let boutonRemplacerOBJ = document.getElementById("boutonRemplacerOBJ");
 boutonCreerOBJ.addEventListener("click", creerOBJ);
+boutonRemplacerOBJ.addEventListener("click", effacerScene3D);
 let objTexte = document.getElementById("objTexte");
+
+function effacerScene3D() {
+    while(scene.children.length > 0){
+        scene.remove(scene.children[0]);
+    }
+    camera.position.set(0, 0, 5);
+    lumierePonctuelle.position.set( -5, 5, 5 );
+    scene.add( lumierePonctuelle );
+    creerOBJ();
+}
+
 function creerOBJ()
 {
     var objURL = 'data:text/plain;charset=utf-8;base64,' + btoa(objTexte.value);
