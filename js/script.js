@@ -1,7 +1,7 @@
 let scene = new THREE.Scene();
 let chargerOBJ = new THREE.OBJLoader();
-let threeLargeur = 400;
-let threeHauteur = 400;
+let threeLargeur = 500;
+let threeHauteur = 507;
 let renderer = new THREE.WebGLRenderer();
 renderer.setSize(threeLargeur,threeHauteur);
 renderer.setClearColor('rgb(100,100,100)');

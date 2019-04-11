@@ -3,7 +3,20 @@ h1, h2, h3{
     background-color: rgb(221,221,221);
 }
 
-/*#objTexte,#container,#boutonCreerOBJ{*/
-/*display: inline-block;*/
+#objTexte,#container,#boutonCreerOBJ,#boutonRemplacerOBJ{
+display: inline-block;
+}
+
+#couleurdiv{
+    width: 100px;
+    height: 100px;
+}
+
+/* Canvas */
+/*#couleurActuel {*/
+    /*width: 50px;*/
+    /*height: 50px;*/
+    /*background-color: rgba(0, 0, 0, 1.0);*/
 /*}*/
+
 

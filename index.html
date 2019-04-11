@@ -8,15 +8,46 @@
 </head>
 <body>
 <h1>Scènes 3D</h1>
-
-<textarea id="objTexte" cols="80" rows="30"></textarea>
+<h2>Comment écrire un fichier .obj</h2>
+<p>...</p>
+<div id="container"></div>
+<textarea id="objTexte" cols="80" rows="32"></textarea>
 <br>
 <button id="boutonCreerOBJ">Ajouter</button>
 <button id="boutonRemplacerOBJ">Remplacer</button>
-<div id="container"></div>
+
+<h3>Changer la lumière</h3>
+<h4>Choix de la couleur</h4>
+<table>
+    <tr>
+        <td>
+            <div id="couleurdiv" style="background-color: black"></div>
+        </td>
+        <td>
+            <i>R:</i>
+            <label for="sliderR"></label><input type="range" id="sliderR" min="0" max="255" value="0" />
+            <b id="valeurR">0</b>
+            <br>
+            <i>G:</i>
+            <label for="sliderG"></label><input type="range" id="sliderG" min="0" max="255" value="0" />
+            <b id="valeurG">0</b>
+            <br>
+            <i>B:</i>
+            <label for="sliderB"></label><input type="range" id="sliderB" min="0" max="255" value="0" />
+            <b id="valeurB">0</b>
+            <br>
+            <i>A:</i>
+            <label for="sliderA"></label><input type="range" id="sliderA" min="0" max="100" value="100" />
+            <b id="valeurA">100</b>
+            <br>
+        </td>
+    </tr>
+</table>
+
 
 <script src="js/OBJLoader.js" type="text/javascript"></script>
 <script src="js/TrackballControls.js" type="text/javascript"></script>
+<script src="js/script_light.js" type="text/javascript"></script>
 <script src="js/script.js" type="text/javascript"></script>
 </body>
 </html>
