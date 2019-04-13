@@ -8,8 +8,9 @@ let chargerOBJ = new THREE.OBJLoader();
 let threeLargeur = 500;
 let threeHauteur = 507;
 let renderer = new THREE.WebGLRenderer();
-let lumiere = new THREE.AmbientLight('rgb(255,255,255)');
+let nbObjects = 0;
 let lumiereActuelle = "ambient";
+let vueObjetsActuelle = "filled";
 renderer.setSize(threeLargeur,threeHauteur);
 renderer.setClearColor('rgb(100,100,100)');
 container = document.getElementById( 'container' );
@@ -52,7 +53,6 @@ function removeLight(){
     for(let i=0; i<scene.children.length; i++){
         if(scene.children[i].name === "light"){
             scene.remove(scene.children[i]);
-            console.log(scene.children[i]);
             break;
         }
     }
@@ -95,9 +95,39 @@ function creerOBJ()
 {
     var objURL = 'data:text/plain;charset=utf-8;base64,' + btoa(objTexte.value);
     chargerOBJ.load(objURL, function ( object ) {
+        switch (vueObjetsActuelle) {
+            case "filled": break;
+            case "wireframe": object.children[0].material.wireframe = true; break;
+            case "vertex" : break;
+        }
         scene.add( object );
-        // objectFromOBJ = object;
+        object.name = "object_" + nbObjects;
+        nbObjects += 1;
     })
+}
+
+function transformFilled(){
+    vueObjetsActuelle = "filled";
+    for (let i=0; i<scene.children.length; i++){
+        let object = scene.children[i];
+        if(object.name.split("_")[0] === "object"){
+            object.children[0].material.wireframe = false
+        }
+    }
+}
+
+function transformWireframe(){
+    vueObjetsActuelle = "wireframe";
+    for (let i=0; i<scene.children.length; i++){
+        let object = scene.children[i];
+        if(object.name.split("_")[0] === "object"){
+            object.children[0].material.wireframe = true
+        }
+    }
+}
+
+function transformVertex(){
+    vueObjetsActuelle = "vertex";
 }
 
 // Faire le rendu de la scène à partir de votre caméra
