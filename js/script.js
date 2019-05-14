@@ -18,16 +18,9 @@ container.appendChild( renderer.domElement );
 
 // Etape 2 : ajouter une caméra
 let camera = new THREE.PerspectiveCamera( 70, threeLargeur/threeHauteur, 0.1, 1000 );
-camera.position.set(0, 0, 5);
+camera.position.set(-3, 1, 0);
 // contrôle à la souris
 let controls = new THREE.TrackballControls( camera, container );
-
-function ajoutCamera (){
-    let camera = new THREE.PerspectiveCamera( 70, threeLargeur/threeHauteur, 0.1, 1000 );
-    camera.position.set(0, 0, 5);
-// contrôle à la souris
-    let controls = new THREE.TrackballControls( camera, container );
-}
 
 function lumiereAmbiante(){
     removeLight();
@@ -78,16 +71,21 @@ function mettreAJourCouleurLumiere(){
 
 let boutonCreerOBJ = document.getElementById("boutonCreerOBJ");
 let boutonRemplacerOBJ = document.getElementById("boutonRemplacerOBJ");
-boutonCreerOBJ.addEventListener("click", creerOBJ);
-boutonRemplacerOBJ.addEventListener("click", effacerScene3D);
+// boutonCreerOBJ.addEventListener("click", creerOBJ);
+boutonRemplacerOBJ.addEventListener("click", remplacerOBJ);
 let objTexte = document.getElementById("objTexte");
 
-function effacerScene3D() {
+
+function effacerScene3D(){
     while(scene.children.length > 0){
         scene.remove(scene.children[0]);
     }
-    ajoutCamera();
+}
+
+function remplacerOBJ() {
+    effacerScene3D();
     creerOBJ();
+    positionCamera();
 }
 
 // display object write in textarea
@@ -103,7 +101,21 @@ function creerOBJ()
         scene.add( object );
         object.name = "object_" + nbObjects;
         nbObjects += 1;
-    })
+        console.log(object);
+    });
+}
+
+function positionCamera(){
+    let idx = setInterval(()=>{
+        try{
+            var sphere = scene.children[0].children[0].geometry.boundingSphere;
+            console.log();
+            camera.position.set(sphere.center.x, sphere.center.y, sphere.center.z);
+            clearInterval(idx);
+        }catch (e) {
+            // console.log(e);
+        }
+    },1);
 }
 
 function transformFilled(){
