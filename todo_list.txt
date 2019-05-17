@@ -9,3 +9,7 @@
 - revoir lumière ponctuelle (ajout d'autres lumières ?)
 
 - déplacement lumière
+
+- rotation objet
+
+- voir pour faire que remplacer obj ne supprime pas la lumière

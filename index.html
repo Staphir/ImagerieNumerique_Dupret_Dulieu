@@ -41,16 +41,24 @@
             <label for="sliderB"></label><input type="range" id="sliderB" min="0" max="255" value="0" />
             <b id="valeurB">0</b>
             <br>
-            <i>A:</i>
-            <label for="sliderIntensite"></label><input type="range" id="sliderIntensite" min="0" max="100" value="100" />
-            <b id="valeurIntensite">100%</b>
-            <br>
         </td>
     </tr>
 </table>
+<i>Intensité:</i>
+<label for="sliderIntensite"></label><input type="range" id="sliderIntensite" min="0" max="100" value="100" />
+<b id="valeurIntensite">100%</b>
+<br>
 <button id="lumiereAmbiante" onclick="lumiereAmbiante()">Lumière ambiante</button>
 <button id="lumierePonctuelle" onclick="lumierePonctuelle()">Lumière ponctuelle</button>
-
+<br>
+<div id="rotateDiv">
+    <label for="selectObjRotate"></label>
+    <select multiple id="selectObjRotate"></select>
+    <button id="rotateobject" onclick="objectToRotate()">Rotation objet</button>
+    <i>Vitesse de rotation:</i>
+    <label for="sliderVitesseRotation"></label><input type="range" id="sliderVitesseRotation" min="1" max="50" value="1" />
+    <b id="vitesseRotation">1</b>
+</div>
 
 <script src="js/OBJLoader.js" type="text/javascript"></script>
 <script src="js/TrackballControls.js" type="text/javascript"></script>

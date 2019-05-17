@@ -2,7 +2,12 @@ let actuelR = 0;
 let actuelG = 0;
 let actuelB = 0;
 let actuelIntensite = 255;
+let listObjToRotate = "";
+let actuelleVitesseRotation = 1;
+let sliderVitesseRotation = document.getElementById("sliderVitesseRotation");
+sliderVitesseRotation.addEventListener("input", changerVitesseRotation);
 //*********************** Create scene ******************************
+let selectObjRotate = document.getElementById("selectObjRotate");
 let scene = new THREE.Scene();
 let chargerOBJ = new THREE.OBJLoader();
 let threeLargeur = 500;
@@ -31,6 +36,9 @@ function lumiereAmbiante(){
     scene.add( lumiere );
     lumiereActuelle = "ambient";
     lumiere.name = "light";
+    if(inChildren(lumiere.name) === false) {
+        addObjRotate(lumiere.name);
+    }
 }
 
 function lumierePonctuelle(){
@@ -41,8 +49,20 @@ function lumierePonctuelle(){
     scene.add( lumiere );
     lumiereActuelle = "ponctuelle";
     lumiere.name = "light";
+    if(inChildren(lumiere.name) === false) {
+        addObjRotate(lumiere.name);
+    }
 }
 lumiereAmbiante();
+
+function inChildren(value){
+    for(var i=0; i<selectObjRotate.children.length; i++){
+        if(selectObjRotate.children[i].value === value){
+            return true;
+        }
+    }
+    return false;
+}
 
 function removeLight(){
     for(let i=0; i<scene.children.length; i++){
@@ -72,11 +92,14 @@ function effacerScene3D(){
     while(scene.children.length > 0){
         scene.remove(scene.children[0]);
     }
+    majSelectObjRotate();
 }
 
 function remplacerOBJ() {
     effacerScene3D();
+    nbObjects = 0;
     creerOBJ();
+    majSelectObjRotate();
 }
 
 // display object write in textarea
@@ -92,7 +115,8 @@ function creerOBJ()
         scene.add( object );
         object.name = "object_" + nbObjects;
         nbObjects += 1;
-        positionCamera()
+        addObjRotate(object.name);
+        positionCamera();
     });
 }
 
@@ -132,9 +156,55 @@ function transformVertex(){
     vueObjetsActuelle = "vertex";
 }
 
+function addObjRotate(nameOption) {
+    var option = document.createElement("option");
+    option.value = nameOption;
+    option.innerHTML = nameOption;
+    selectObjRotate.appendChild(option);
+}
+
+function majSelectObjRotate(){
+    while (selectObjRotate.children.length > 0){
+        selectObjRotate.remove(selectObjRotate.children[0]);
+    }
+    for(var i=0; i<scene.children.length; i++){
+        var nameOption = scene.children[i].name;
+        addObjRotate(nameOption);
+    }
+}
+majSelectObjRotate();
+
+function changerVitesseRotation(event) {
+    let vitesseRotation = document.getElementById("vitesseRotation");
+    vitesseRotation.innerHTML = event.target.value;
+    actuelleVitesseRotation = event.target.value;
+}
+
+function objectToRotate(){
+    let selectObjRotate = document.getElementById("selectObjRotate");
+    listObjToRotate = selectObjRotate.value;
+}
+
+function avanceRotation(){
+    if(listObjToRotate !== ""){
+        for(var i=0; i<scene.children.length; i++){
+            if(scene.children[i].name === listObjToRotate){
+                var object = scene.children[i];
+                break;
+            }
+        }
+        if(object.name === "light"){
+
+        }else{
+            object.rotation.z += actuelleVitesseRotation/100;
+        }
+    }
+}
+
 // Faire le rendu de la scène à partir de votre caméra
 renderer.render( scene, camera );
 function animer(){
+    avanceRotation();
     requestAnimationFrame( animer );
     renderer.render( scene, camera );
     controls.update();
