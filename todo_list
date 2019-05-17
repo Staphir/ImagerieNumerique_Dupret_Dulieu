@@ -1,0 +1,13 @@
+- texte pour expliquer .obj , filled et wireferame, programmation asynchrone...
+
+- exemples .obj (et peut-être texture mapping)
+
+- recul de la camera en fonction de l'objet
+
+- couleur alpha
+
+- rotation camera : vitesse (slider), combien en x, y et z (sliders)
+
+- revoir lumière ponctuelle (ajout d'autres lumières ?)
+
+- déplacement lumière

@@ -22,6 +22,8 @@ camera.position.set(-3, 1, 0);
 // contrôle à la souris
 let controls = new THREE.TrackballControls( camera, container );
 
+// Etape 3 : ajouter une lumière ambiante
+
 function lumiereAmbiante(){
     removeLight();
     let lumiere = new THREE.AmbientLight('rgb('+actuelR+','+actuelG+','+actuelB+')');
@@ -59,19 +61,9 @@ function mettreAJourCouleurLumiere(){
     }
 }
 
-// // Etape 3 : ajouter une lumière ambiante
-// let lumiereAmbiente  = new THREE.AmbientLight( 'rgb(255,255,255)');
-// lumiereAmbiente.intensity = 0.5;
-// // scene.add( lumiereAmbiente );
-// // ajouter une lumière ponctuelle
-// let lumierePonctuelle = new THREE.PointLight( 'rgb(255,255,255)', 1, 100 );
-// lumierePonctuelle.position.set( -5, 5, 5 );
-// lumierePonctuelle.intensity = 0.5;
-// scene.add( lumierePonctuelle );
-
 let boutonCreerOBJ = document.getElementById("boutonCreerOBJ");
 let boutonRemplacerOBJ = document.getElementById("boutonRemplacerOBJ");
-// boutonCreerOBJ.addEventListener("click", creerOBJ);
+boutonCreerOBJ.addEventListener("click", creerOBJ);
 boutonRemplacerOBJ.addEventListener("click", remplacerOBJ);
 let objTexte = document.getElementById("objTexte");
 
@@ -85,7 +77,6 @@ function effacerScene3D(){
 function remplacerOBJ() {
     effacerScene3D();
     creerOBJ();
-    positionCamera();
 }
 
 // display object write in textarea
@@ -101,7 +92,7 @@ function creerOBJ()
         scene.add( object );
         object.name = "object_" + nbObjects;
         nbObjects += 1;
-        console.log(object);
+        positionCamera()
     });
 }
 
@@ -109,7 +100,6 @@ function positionCamera(){
     let idx = setInterval(()=>{
         try{
             var sphere = scene.children[0].children[0].geometry.boundingSphere;
-            console.log();
             camera.position.set(sphere.center.x, sphere.center.y, sphere.center.z);
             clearInterval(idx);
         }catch (e) {
@@ -199,3 +189,4 @@ function mettreAJourCouleurRGBA(){
 }
 
 //*******************************************************************
+
