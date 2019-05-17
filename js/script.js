@@ -37,7 +37,6 @@ function lumierePonctuelle(){
     removeLight();
     let lumiere = new THREE.PointLight('rgb('+actuelR+','+actuelG+','+actuelB+')', 1, 100);
     lumiere.position.set( -5, 5, 5 );
-    lumiere.intensity = 0.5;
     scene.add( lumiere );
     lumiereActuelle = "ponctuelle";
     lumiere.name = "light";
@@ -100,7 +99,7 @@ function positionCamera(){
     let idx = setInterval(()=>{
         try{
             var sphere = scene.children[0].children[0].geometry.boundingSphere;
-            camera.position.set(sphere.center.x, sphere.center.y, sphere.center.z);
+            camera.position.set(sphere.center.x, sphere.center.y, sphere.center.z + sphere.radius);
             clearInterval(idx);
         }catch (e) {
             // console.log(e);
