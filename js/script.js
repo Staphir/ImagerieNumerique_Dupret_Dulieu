@@ -1,7 +1,7 @@
 let actuelR = 0;
 let actuelG = 0;
 let actuelB = 0;
-let actuelA = 255;
+let actuelIntensite = 255;
 //*********************** Create scene ******************************
 let scene = new THREE.Scene();
 let chargerOBJ = new THREE.OBJLoader();
@@ -27,7 +27,7 @@ let controls = new THREE.TrackballControls( camera, container );
 function lumiereAmbiante(){
     removeLight();
     let lumiere = new THREE.AmbientLight('rgb('+actuelR+','+actuelG+','+actuelB+')');
-    lumiere.intensity = 0.5;
+    lumiere.intensity = actuelIntensite/100;
     scene.add( lumiere );
     lumiereActuelle = "ambient";
     lumiere.name = "light";
@@ -37,7 +37,7 @@ function lumierePonctuelle(){
     removeLight();
     let lumiere = new THREE.PointLight('rgb('+actuelR+','+actuelG+','+actuelB+')', 1, 100);
     lumiere.position.set( -5, 5, 5 );
-    lumiere.intensity = 0.5;
+    lumiere.intensity = actuelIntensite/100;
     scene.add( lumiere );
     lumiereActuelle = "ponctuelle";
     lumiere.name = "light";
@@ -146,45 +146,49 @@ animer();
 let sliderR = document.getElementById("sliderR");
 let sliderG = document.getElementById("sliderG");
 let sliderB = document.getElementById("sliderB");
-let sliderA = document.getElementById("sliderA");
+let sliderIntensite = document.getElementById("sliderIntensite");
 sliderR.addEventListener("input", changerR);
 sliderG.addEventListener("input", changerG);
 sliderB.addEventListener("input", changerB);
-sliderA.addEventListener("input", changerA);
+sliderIntensite.addEventListener("input", changerIntensite);
 
 
 function changerR(event){
     let valeurR = document.getElementById("valeurR");
     valeurR.innerHTML = event.target.value;
-    mettreAJourCouleurRGBA();
+    mettreAJourCouleurRGB();
 }
 function changerG(event){
     let valeurG = document.getElementById("valeurG");
     valeurG.innerHTML = event.target.value;
-    mettreAJourCouleurRGBA();
+    mettreAJourCouleurRGB();
 }
 function changerB(event){
     let valeurB = document.getElementById("valeurB");
     valeurB.innerHTML = event.target.value;
-    mettreAJourCouleurRGBA();
+    mettreAJourCouleurRGB();
 }
-function changerA(event){
-    let valeurA = document.getElementById("valeurA");
-    valeurA.innerHTML = event.target.value;
-    mettreAJourCouleurRGBA();
+function changerIntensite(event){
+    let valeurIntensite = document.getElementById("valeurIntensite");
+    valeurIntensite.innerHTML = event.target.value + "%";
+    mettreAJourIntensite();
 }
 
-function mettreAJourCouleurRGBA(){
+function mettreAJourCouleurRGB(){
     let sliderR = document.getElementById("sliderR");
     let sliderG = document.getElementById("sliderG");
     let sliderB = document.getElementById("sliderB");
-    let sliderA = document.getElementById("sliderA");
     let couleurdiv = document.getElementById("couleurdiv");
-    couleurdiv.style.backgroundColor ="rgba("+sliderR.value+","+sliderG.value+","+sliderB.value+","+sliderA.value/100+")";
+    couleurdiv.style.backgroundColor ="rgb("+sliderR.value+","+sliderG.value+","+sliderB.value+")";
     actuelR = sliderR.value;
     actuelG = sliderG.value;
     actuelB = sliderB.value;
-    actuelA = 255*sliderA.value/100;
+    mettreAJourCouleurLumiere();
+}
+
+function mettreAJourIntensite(){
+    let sliderIntensite = document.getElementById("sliderIntensite");
+    actuelIntensite = 255*sliderIntensite.value/100;
     mettreAJourCouleurLumiere();
 }
 
