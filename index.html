@@ -51,14 +51,29 @@
 <button id="lumiereAmbiante" onclick="lumiereAmbiante()">Lumière ambiante</button>
 <button id="lumierePonctuelle" onclick="lumierePonctuelle()">Lumière ponctuelle</button>
 <br>
-<div id="rotateDiv">
-    <label for="selectObjRotate"></label>
-    <select multiple id="selectObjRotate"></select>
-    <button id="rotateobject" onclick="objectToRotate()">Rotation objet</button>
-    <i>Vitesse de rotation:</i>
-    <label for="sliderVitesseRotation"></label><input type="range" id="sliderVitesseRotation" min="1" max="50" value="1" />
-    <b id="vitesseRotation">1</b>
-</div>
+<h3>Rotation objet</h3>
+<table>
+    <tr>
+        <td>
+            <label for="selectObjRotate"></label>
+            <select multiple id="selectObjRotate"></select>
+        </td>
+        <td>
+            <i>Vitesse de rotation axe X:</i>
+            <label for="sliderVitesseRotationX"></label><input type="range" id="sliderVitesseRotationX" min="0" max="50" value="1" />
+            <b id="vitesseRotationX">1</b>
+            <br>
+            <i>Vitesse de rotation axe Y:</i>
+            <label for="sliderVitesseRotationY"></label><input type="range" id="sliderVitesseRotationY" min="0" max="50" value="1" />
+            <b id="vitesseRotationY">1</b>
+            <br>
+            <i>Vitesse de rotation axe Z:</i>
+            <label for="sliderVitesseRotationZ"></label><input type="range" id="sliderVitesseRotationZ" min="0" max="50" value="1" />
+            <b id="vitesseRotationZ">1</b>
+        </td>
+    </tr>
+</table>
+<button id="rotateobject" onclick="objectToRotate()">Rotation objet</button>
 
 <script src="js/OBJLoader.js" type="text/javascript"></script>
 <script src="js/TrackballControls.js" type="text/javascript"></script>

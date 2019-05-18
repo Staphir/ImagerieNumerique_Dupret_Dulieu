@@ -10,6 +10,6 @@
 
 - déplacement lumière
 
-- rotation objet
+- meilleur placement sur la page
 
 - voir pour faire que remplacer obj ne supprime pas la lumière

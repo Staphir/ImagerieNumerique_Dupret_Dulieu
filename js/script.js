@@ -3,9 +3,15 @@ let actuelG = 0;
 let actuelB = 0;
 let actuelIntensite = 255;
 let listObjToRotate = "";
-let actuelleVitesseRotation = 1;
-let sliderVitesseRotation = document.getElementById("sliderVitesseRotation");
-sliderVitesseRotation.addEventListener("input", changerVitesseRotation);
+let actuelleVitesseRotationX = 1;
+let sliderVitesseRotationX = document.getElementById("sliderVitesseRotationX");
+sliderVitesseRotationX.addEventListener("input", changerVitesseRotationX);
+let actuelleVitesseRotationY = 1;
+let sliderVitesseRotationY = document.getElementById("sliderVitesseRotationY");
+sliderVitesseRotationY.addEventListener("input", changerVitesseRotationY);
+let actuelleVitesseRotationZ = 1;
+let sliderVitesseRotationZ = document.getElementById("sliderVitesseRotationZ");
+sliderVitesseRotationZ.addEventListener("input", changerVitesseRotationZ);
 //*********************** Create scene ******************************
 let selectObjRotate = document.getElementById("selectObjRotate");
 let scene = new THREE.Scene();
@@ -174,10 +180,22 @@ function majSelectObjRotate(){
 }
 majSelectObjRotate();
 
-function changerVitesseRotation(event) {
-    let vitesseRotation = document.getElementById("vitesseRotation");
-    vitesseRotation.innerHTML = event.target.value;
-    actuelleVitesseRotation = event.target.value;
+function changerVitesseRotationX(event) {
+    let vitesseRotationX = document.getElementById("vitesseRotationX");
+    vitesseRotationX.innerHTML = event.target.value;
+    actuelleVitesseRotationX = event.target.value;
+}
+
+function changerVitesseRotationY(event) {
+    let vitesseRotationY = document.getElementById("vitesseRotationY");
+    vitesseRotationY.innerHTML = event.target.value;
+    actuelleVitesseRotationY = event.target.value;
+}
+
+function changerVitesseRotationZ(event) {
+    let vitesseRotationZ = document.getElementById("vitesseRotationZ");
+    vitesseRotationZ.innerHTML = event.target.value;
+    actuelleVitesseRotationZ = event.target.value;
 }
 
 function objectToRotate(){
@@ -196,7 +214,9 @@ function avanceRotation(){
         if(object.name === "light"){
 
         }else{
-            object.rotation.z += actuelleVitesseRotation/100;
+            object.rotation.x += actuelleVitesseRotationX/100;
+            object.rotation.y += actuelleVitesseRotationY/100;
+            object.rotation.z += actuelleVitesseRotationZ/100;
         }
     }
 }
