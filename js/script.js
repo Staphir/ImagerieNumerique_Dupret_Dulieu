@@ -20,6 +20,7 @@ let threeLargeur = 500;
 let threeHauteur = 507;
 let renderer = new THREE.WebGLRenderer();
 let nbObjects = 0;
+let nbVertex = 0;
 let lumiereActuelle = "ambient";
 let vueObjetsActuelle = "filled";
 renderer.setSize(threeLargeur,threeHauteur);
@@ -79,7 +80,7 @@ function removeLight(){
     }
 }
 
-function mettreAJourCouleurLumiere(){
+function mettreAJourLumiere(){
     if (lumiereActuelle === "ambient"){
         lumiereAmbiante();
     }else{
@@ -98,6 +99,7 @@ function effacerScene3D(){
     while(scene.children.length > 0){
         scene.remove(scene.children[0]);
     }
+    mettreAJourLumiere();
     majSelectObjRotate();
 }
 
@@ -113,17 +115,28 @@ function creerOBJ()
 {
     var objURL = 'data:text/plain;charset=utf-8;base64,' + btoa(objTexte.value);
     chargerOBJ.load(objURL, function ( object ) {
-        switch (vueObjetsActuelle) {
-            case "filled": break;
-            case "wireframe": object.children[0].material.wireframe = true; break;
-            case "vertex" : break;
-        }
         scene.add( object );
         object.name = "object_" + nbObjects;
         nbObjects += 1;
         addObjRotate(object.name);
         positionCamera();
+        object.children[0].geometry.vertices = [];
+        var objVertices = object.children[0].geometry.vertices;
+        selectVertices(objVertices);
+        switch (vueObjetsActuelle) {
+            case "filled": break;
+            case "wireframe": object.children[0].material.wireframe = true; break;
+            case "vertex" : transformVertex(); break;
+        }
     });
+}
+
+function selectVertices(objVertices) {
+    var splitV = objTexte.value.split("v");
+    for (var i=1; i<splitV.length; i++){
+        var splitCoord = splitV[i].split(" ");
+        objVertices.push(new THREE.Vector3(parseFloat(splitCoord[1]),parseFloat(splitCoord[2]),parseFloat(splitCoord[3])));
+    }
 }
 
 function positionCamera(){
@@ -140,9 +153,11 @@ function positionCamera(){
 
 function transformFilled(){
     vueObjetsActuelle = "filled";
+    deleteVertex();
     for (let i=0; i<scene.children.length; i++){
         let object = scene.children[i];
         if(object.name.split("_")[0] === "object"){
+            object.visible = true;
             object.children[0].material.wireframe = false
         }
     }
@@ -150,9 +165,11 @@ function transformFilled(){
 
 function transformWireframe(){
     vueObjetsActuelle = "wireframe";
+    deleteVertex();
     for (let i=0; i<scene.children.length; i++){
         let object = scene.children[i];
         if(object.name.split("_")[0] === "object"){
+            object.visible = true;
             object.children[0].material.wireframe = true
         }
     }
@@ -160,6 +177,41 @@ function transformWireframe(){
 
 function transformVertex(){
     vueObjetsActuelle = "vertex";
+    for (let i=0; i<scene.children.length; i++){
+        let object = scene.children[i];
+        if(object.name.split("_")[0] === "object"){
+            toVertex(object);
+            object.visible = false;
+        }
+    }
+}
+
+function toVertex(obj){
+    objVertices = obj.children[0].geometry.vertices;
+    for (var i=0; i<objVertices.length; i++){
+        var geometry = new THREE.SphereGeometry( 0.02, 32, 32 );
+        geometry.translate(objVertices[i].x,objVertices[i].y,objVertices[i].z);
+        geometry.name = "vertex_" + nbVertex;
+        nbVertex += 1;
+        var material = new THREE.MeshBasicMaterial( {color: 0xffff00} );
+        var pointVertex = new THREE.Mesh( geometry, material );
+        scene.add( pointVertex );
+    }
+}
+
+function deleteVertex() {
+    recul = 0;
+    len = scene.children.length;
+    for (var i=0; i<len; i++){
+        try {
+            if(scene.children[i-recul].geometry.name.split("_")[0] === "vertex"){
+                scene.children.splice(i-recul,1);
+                recul++;
+            }
+        }catch (e) {
+            // console.log(e);
+        }
+    }
 }
 
 function addObjRotate(nameOption) {
@@ -273,13 +325,13 @@ function mettreAJourCouleurRGB(){
     actuelR = sliderR.value;
     actuelG = sliderG.value;
     actuelB = sliderB.value;
-    mettreAJourCouleurLumiere();
+    mettreAJourLumiere();
 }
 
 function mettreAJourIntensite(){
     let sliderIntensite = document.getElementById("sliderIntensite");
     actuelIntensite = 255*sliderIntensite.value/100;
-    mettreAJourCouleurLumiere();
+    mettreAJourLumiere();
 }
 
 //*******************************************************************

@@ -2,6 +2,8 @@
  * @author mrdoob / http://mrdoob.com/
  */
 
+let objGeometry = [];
+
 THREE.OBJLoader = ( function () {
 
 	// o object_name | g group_name
@@ -337,7 +339,7 @@ THREE.OBJLoader = ( function () {
 				onLoad( scope.parse( text ) );
 
 			}, onProgress, onError );
-
+			return objGeometry.vertices;
 		},
 
 		setPath: function ( value ) {
@@ -658,13 +660,21 @@ THREE.OBJLoader = ( function () {
 			}
 
 			console.timeEnd( 'OBJLoader' );
-
+			objGeometry = geometry;
 			return container;
 
 		}
 
 	};
-
+	// let idx = setInterval(()=>{
+	// 	try{
+	//
+	// 		clearInterval(idx);
+	// 		return OBJLoader;
+	// 	}catch (e) {
+	// 		// console.log(e);
+	// 	}
+	// },1);
 	return OBJLoader;
 
 } )();
