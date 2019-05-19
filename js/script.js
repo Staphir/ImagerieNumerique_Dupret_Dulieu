@@ -126,6 +126,13 @@ function exempleCube() {
 /**************************nouvelle lumière***************************/
 function lumiereAmbiante(){
     removeLight();
+    //suppression sphere pointLight
+    try {
+        var index = indexStr("spherePonctuelle");
+        supSphere(index);
+    }catch (e) {
+        // console.log(e);
+    }
     let lumiere = new THREE.AmbientLight('rgb('+actuelR+','+actuelG+','+actuelB+')');
     lumiere.intensity = actuelIntensite;
     scene.add( lumiere );
@@ -140,26 +147,80 @@ function lumiereAmbiante(){
 
 function lumierePonctuelle(){
     removeLight();
-    let lumiere = new THREE.PointLight('rgb('+actuelR+','+actuelG+','+actuelB+')', 1, 100);
-    lumiere.position.set( 1, 1, 1.5 );
-    // lumiere.intensity = actuelIntensite/100;
-    scene.add( lumiere );
-    lumiereActuelle = "ponctuelle";
-    lumiere.name = "light";
-    sphereLumierePonctuelle();
+    let idx = setInterval(()=>{
+        try{
+            //suppression sphere pointLight
+            try {
+                var index = indexStr("spherePonctuelle");
+                supSphere(index);
+            }catch (e) {
+                // console.log(e);
+            }
+            //récupération sphere englobante
+            var index = indexStr("object");
+            var sphere = scene.children[index].children[0].geometry.boundingSphere;
+            //création lumière et positionnement
+            let lumiere = new THREE.PointLight('rgb('+actuelR+','+actuelG+','+actuelB+')', 1, 100);
+            lumiere.position.set(sphere.center.x + sphere.radius,sphere.center.y + sphere.radius, sphere.center.z);
+            lumiere.intensity = actuelIntensite;
+            scene.add( lumiere );
+            lumiereActuelle = "ponctuelle";
+            lumiere.name = "light";
+            //création sphère représentant la lumière
+            sphereLumierePonctuelle();
+            //arrêt du setInterval
+            clearInterval(idx);
+        }catch (e) {
+            // console.log(e);
+        }
+    },1);
+
+
 }
 
 function sphereLumierePonctuelle() {
+    let idx = setInterval(()=>{
+        try{
+            //récupération sphere englobante
+            var index = indexStr("object");
+            var sphere = scene.children[index].children[0].geometry.boundingSphere;
+            //création sphère représentant la lumière
+            var geometry = new THREE.SphereGeometry( 0.05, 32, 32 );
+            geometry.translate(sphere.center.x + sphere.radius,sphere.center.y + sphere.radius, sphere.center.z);
+            var couleur = new THREE.Color('rgb('+actuelR+','+actuelG+','+actuelB+')');
+            var material = new THREE.MeshBasicMaterial( {color: couleur} );
+            var pointVertex = new THREE.Mesh( geometry, material );
+            pointVertex.name = "spherePonctuelle";
+            scene.add( pointVertex );
+            //arrêt du setInterval
+            clearInterval(idx);
+        }catch (e) {
+            // console.log(e);
+        }
+    },1);
+}
 
-    var geometry = new THREE.SphereGeometry( 0.05, 32, 32 );
-    geometry.translate(1,1,1.5);
-    var material = new THREE.MeshBasicMaterial( {color: 0x888888} );
-    var pointVertex = new THREE.Mesh( geometry, material );
-    scene.add( pointVertex );
+function supSphere(index) {
+    let idx = setInterval(()=>{
+        try{
+            scene.remove(scene.children[index]);
+            //arrêt du setInterval
+            clearInterval(idx);
+        }catch (e) {
+            // console.log(e);
+        }
+    },1);
 }
 
 function lumiereSpot(){
     removeLight();
+    //suppression sphere pointLight
+    try {
+        var index = indexStr("spherePonctuelle");
+        supSphere(index);
+    }catch (e) {
+        // console.log(e);
+    }
     let lumiere = new THREE.SpotLight('rgb('+actuelR+','+actuelG+','+actuelB+')');
     lumiere.position.set( 3, 3, 0 );
     lumiere.intensity = actuelIntensite/100;
@@ -333,7 +394,8 @@ function positionCamera(){
     //test récupération de la sphère englobante toutes les 1ms (javascript = asynchrone)
     let idx = setInterval(()=>{
         try{
-            var sphere = scene.children[0].children[0].geometry.boundingSphere;
+            var index = indexStr("object");
+            var sphere = scene.children[index].children[0].geometry.boundingSphere;
             //placement de la caméra sur le nouvel objet
             camera.position.set(sphere.center.x + sphere.radius*2, sphere.center.y + sphere.radius*2, sphere.center.z + sphere.radius);
             //arrêt du setInterval
@@ -507,7 +569,16 @@ animer();
 /*******************end rotation objet*************************************************/
 
 /***************fonctions annexes***********************/
-function indexDernierObjet() {
-    strLastObject = "object_"+(nbObjects-1).toString();
-
+//récupération de l'index dans la scène de l'objet avec le nom "str"
+function indexStr(str) {
+    if(str === "object"){
+        strLastObject = "object_"+(nbObjects-1).toString();
+    }else{
+        strLastObject = str;
+    }
+    for(var i=0; i<scene.children.length; i++){
+        if(scene.children[i].name === strLastObject){
+            return i;
+        }
+    }
 }
