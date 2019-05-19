@@ -15,3 +15,5 @@
 - voir pour faire que remplacer obj ne supprime pas la lumière
 
 - placement camera objet (pourquoi seulement quand modification lumière ?)
+
+- quand rotation vertex ne bouge pas car déterminer à partir du .obj
