@@ -67,6 +67,10 @@ let camera = new THREE.PerspectiveCamera( 70, threeLargeur/threeHauteur, 0.1, 10
 camera.position.set(-3, 1, 0);
 
 let controls = new THREE.TrackballControls( camera, container );
+
+//Création axes
+var axesHelper = new THREE.AxesHelper( 5 );
+scene.add( axesHelper );
 /************************end Création scene**************************/
 
 /**********************Exemple objet*************************/
@@ -138,11 +142,6 @@ function lumiereAmbiante(){
     scene.add( lumiere );
     lumiereActuelle = "ambient";
     lumiere.name = "light";
-
-    //on ne met pas en rotation ce type de lumière
-    // if(inChildren(lumiere.name) === false) {
-    //     addObjRotate(lumiere.name);
-    // }
 }
 
 function lumierePonctuelle(){
@@ -214,7 +213,6 @@ function supSphere(index) {
 
 function lumiereSpot(){
     removeLight();
-
     let idx = setInterval(()=>{
         try{
             //suppression sphere pointLight
@@ -245,21 +243,13 @@ function lumiereSpot(){
     },1);
 }
 
+//Création d'objet représentant le spot
 function objectSpot() {
 
 }
 
 lumiereAmbiante();
 
-//Vérification dans la liste de rotation (que pour certaines lumières)
-function inChildren(value){
-    for(var i=0; i<selectObjRotate.children.length; i++){
-        if(selectObjRotate.children[i].value === value){
-            return true;
-        }
-    }
-    return false;
-}
 //Retirer toutes les lumières de la scène
 function removeLight(){
     for(let i=0; i<scene.children.length; i++){
@@ -328,6 +318,9 @@ function effacerScene3D(){
     while(scene.children.length > 0){
         scene.remove(scene.children[0]);
     }
+    //Création axes
+    var axesHelper = new THREE.AxesHelper( 5 );
+    scene.add( axesHelper );
     //remettre la lumière
     mettreAJourLumiere();
     //remplir la liste des objets pouvants être en rotation
@@ -576,9 +569,6 @@ function animer(){
         //modification des coordonnées de l'objet en rotation
         avanceRotation();
     }
-	var axesHelper = new THREE.AxesHelper( 5 );
-	axesHelper.size = 10;
-	scene.add( axesHelper );
     requestAnimationFrame( animer );
     renderer.render( scene, camera );
     controls.update();
