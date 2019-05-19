@@ -576,6 +576,9 @@ function animer(){
         //modification des coordonnées de l'objet en rotation
         avanceRotation();
     }
+	var axesHelper = new THREE.AxesHelper( 5 );
+	axesHelper.size = 10;
+	scene.add( axesHelper );
     requestAnimationFrame( animer );
     renderer.render( scene, camera );
     controls.update();
