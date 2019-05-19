@@ -55,7 +55,7 @@ Si vous avez bien compris cette présentation et que vous comprenez les 2 petits
 
 <button id="boutonFilled" onclick="transformFilled()">Filled</button>
 <button id="boutonWireframe" onclick="transformWireframe()">Wireframe</button>
-<button id="boutonVertex" onclick="transformVertex()">Vertex (sur l'emplacement de original)</button>
+<button id="boutonVertex" onclick="transformVertex()">Vertex (sur l'emplacement original de l'objet)</button>
 
 
 <h3>Changer la lumière</h3>
@@ -89,6 +89,7 @@ Si vous avez bien compris cette présentation et que vous comprenez les 2 petits
 
 <button id="lumiereAmbiante" onclick="lumiereAmbiante()">Lumière ambiante</button>
 <button id="lumierePonctuelle" onclick="lumierePonctuelle()">Lumière ponctuelle</button>
+<button id="lumiereRectangulaire" onclick="lumiereRectangulaire()">Lumière zone rectangulaire</button>
 <br>
 
 <h3>Rotation objet</h3>
@@ -115,6 +116,27 @@ Si vous avez bien compris cette présentation et que vous comprenez les 2 petits
 </table>
 <button id="rotateobject" onclick="objectToRotate()">Rotation objet</button>
 <button id="stopRotate" onclick="stopRotation()">Arrêt rotation</button>
+
+<h3>Le caractère asynchrone du Javascript</h3>
+<p>
+    Le javascript est un langage asynchrone, c'est-à-dire que le code s'exécute à la suite sans attendre la fin des autres fonctions.
+    Il faut faire attention à cela car une variable peut être indéfinie pour le programme au moment où il veut y accéder seulement parce-que
+    la fonction l'initialisant n'est pas encore fini. Voici deux solutions pour palier à ce problème :
+<ol>
+    <li>
+        Mettre un booléen à "true" quand la variable a été initialisée et attendre que ce booléen soit à "true" avant de lancer
+        la fonction qui a besoin de la variable.
+    </li>
+    <br>
+    <li>
+        Utiliser un setInterval/clearInterval et un try{}catch{}.
+        Le setInterval va permettre de tester toutes les x millisecondes si la variable existe et le clearInterval arrêtera le setInterval une
+        fois la variable initialisée. Le try{}catch{} permettra d'éviter les erreurs. En effet, en mettant la fonction utilisant la variable
+        peut-être initialisée dans le try{}, il n'y aura pas d'erreur si elle n'est pas encore définie, la fonction passera seulement dans le catch{}
+        avant de re-tester x millisecondes après. Il ne faut pas oublier de mettre le clearInterval à la fin du try{}.
+    </li>
+</ol>
+</p>
 
 <script src="js/OBJLoader.js" type="text/javascript"></script>
 <script src="js/TrackballControls.js" type="text/javascript"></script>

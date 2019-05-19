@@ -152,6 +152,17 @@ function lumierePonctuelle(){
     //     addObjRotate(lumiere.name);
     // }
 }
+
+function lumiereRectangulaire(){
+    removeLight();
+    let lumiere = new THREE.RectAreaLights('rgb('+actuelR+','+actuelG+','+actuelB+')', 1, 10, 10);
+    lumiere.position.set( 2, 2, 0 );
+    lumiere.intensity = actuelIntensite/100;
+    scene.add( lumiere );
+    lumiereActuelle = "rectArea";
+    lumiere.name = "light";
+}
+
 lumiereAmbiante();
 
 //Vérification dans la liste de rotation (que pour certaines lumières)
