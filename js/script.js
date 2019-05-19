@@ -3,7 +3,7 @@
 let actuelR = 0;
 let actuelG = 0;
 let actuelB = 0;
-let actuelIntensite = 255;
+let actuelIntensite = 100;
 let lumiereActuelle = "ambient";
 
 let sliderR = document.getElementById("sliderR");
@@ -153,13 +153,13 @@ function lumierePonctuelle(){
     // }
 }
 
-function lumiereRectangulaire(){
+function lumiereSpot(){
     removeLight();
-    let lumiere = new THREE.RectAreaLights('rgb('+actuelR+','+actuelG+','+actuelB+')', 1, 10, 10);
-    lumiere.position.set( 2, 2, 0 );
+    let lumiere = new THREE.SpotLight('rgb('+actuelR+','+actuelG+','+actuelB+')');
+    lumiere.position.set( 3, 3, 0 );
     lumiere.intensity = actuelIntensite/100;
     scene.add( lumiere );
-    lumiereActuelle = "rectArea";
+    lumiereActuelle = "spot";
     lumiere.name = "light";
 }
 
@@ -185,10 +185,10 @@ function removeLight(){
 }
 
 function mettreAJourLumiere(){
-    if (lumiereActuelle === "ambient"){
-        lumiereAmbiante();
-    }else{
-        lumierePonctuelle();
+    switch (lumiereActuelle) {
+        case "ambient": lumiereAmbiante(); break;
+        case "ponctuelle": lumierePonctuelle(); break;
+        case "spot": lumiereSpot(); break;
     }
 }
 /***************end nouvelle lumière***************************/
@@ -269,6 +269,7 @@ function creerOBJ()
         addObjRotate(object.name);
         //positionner la camera sur le nouvel objet
         positionCamera();
+        mettreAJourIntensite();
         //---stockage des vertex de l'objet-----
         object.children[0].geometry.vertices = [];
         var objVertices = object.children[0].geometry.vertices;
@@ -324,7 +325,7 @@ function positionCamera(){
         try{
             var sphere = scene.children[0].children[0].geometry.boundingSphere;
             //placement de la caméra sur le nouvel objet
-            camera.position.set(sphere.center.x + sphere.radius, sphere.center.y + sphere.radius, sphere.center.z + sphere.radius);
+            camera.position.set(sphere.center.x + sphere.radius*2, sphere.center.y + sphere.radius*2, sphere.center.z + sphere.radius);
             //arrêt du setInterval
             clearInterval(idx);
         }catch (e) {
