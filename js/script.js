@@ -214,24 +214,39 @@ function supSphere(index) {
 
 function lumiereSpot(){
     removeLight();
-    //suppression sphere pointLight
-    try {
-        var index = indexStr("spherePonctuelle");
-        supSphere(index);
-    }catch (e) {
-        // console.log(e);
-    }
-    let lumiere = new THREE.SpotLight('rgb('+actuelR+','+actuelG+','+actuelB+')');
-    lumiere.position.set( 3, 3, 0 );
-    lumiere.intensity = actuelIntensite/100;
-    scene.add( lumiere );
-    lumiereActuelle = "spot";
-    lumiere.name = "light";
 
-    //on ne met pas en rotation ce type de lumière
-    // if(inChildren(lumiere.name) === false) {
-    //     addObjRotate(lumiere.name);
-    // }
+    let idx = setInterval(()=>{
+        try{
+            //suppression sphere pointLight
+            try {
+                var index = indexStr("spherePonctuelle");
+                supSphere(index);
+            }catch (e) {
+                // console.log(e);
+            }
+            //récupération sphere englobante
+            var index = indexStr("object");
+            var sphere = scene.children[index].children[0].geometry.boundingSphere;
+            //création lumière et positionnement
+            let lumiere = new THREE.SpotLight('rgb('+actuelR+','+actuelG+','+actuelB+')');
+            lumiere.angle = 0.35;
+            lumiere.position.set(sphere.center.x + sphere.radius,sphere.center.y, sphere.center.z + sphere.radius);
+            lumiere.intensity = actuelIntensite;
+            scene.add( lumiere );
+            lumiereActuelle = "spot";
+            lumiere.name = "light";
+            //création spot représentant la lumière
+            objectSpot();
+            //arrêt du setInterval
+            clearInterval(idx);
+        }catch (e) {
+            // console.log(e);
+        }
+    },1);
+}
+
+function objectSpot() {
+
 }
 
 lumiereAmbiante();
