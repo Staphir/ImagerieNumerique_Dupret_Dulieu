@@ -1,6 +1,0 @@
-- Déplacement lumière (que certaines lumières et
-  pas les deux implémentées (ambient et point))
-
-- meilleur placement sur la page (css pas important)
-
-- quand rotation vertex ne bouge pas car déterminer à partir du .obj

@@ -16,17 +16,17 @@
 
 	Les positions des sommets de votre figure sont définies dans l'ordre sur les axes x y et z, autrement dit longueur, hauteur et profondeur.</br>
 	Par convention usuelle, l'axe rouge représente les x, l'axe vert les y et l'axe bleue les z ou la profondeur.
-	La définition d'un sommet commence toujours par un v, il s'agit de la notation usuelle.</br> 
-	Un sommet peut alors s'écrire : v 0 0 0  positionné à la position x=0,y=0 et z=0, autrement dit au centre de la scène.</br></br>
+	La définition d'un sommet commence toujours par un v (pour vertex), il s'agit de la notation usuelle.</br>
+	Un sommet peut alors s'écrire : v 0 0 0  positionné à la position x=0, y=0 et z=0, autrement dit au centre de la scène.</br></br>
 
 	Si vous souhaitez définir la première face d'un cube, il faut d'abord définir les 3 autres sommets pour réaliser une face.</br>
-	Ainsi, les sommets v000, v100,v110 et v010 définissent les 4 sommets d'une potentielle face, et dans l'ordre, portent les numéros 1,2,3 et 4.</br>
-	Il suffit alors de donner la face correspondante avec la notation commençant par f : f 1 2 3 4.</br> 
+	Ainsi, les sommets v 0 0 0, v 1 0 0, v 1 1 0 et v 0 1 0 définissent les 4 sommets d'une potentielle face, et dans l'ordre, portent les numéros 1,2,3 et 4.</br>
+	Il suffit alors de donner la face correspondante avec la notation commençant par f : f 1 2 3 4.</br>
 	Vous devriez voir votre face apparaître dans la couleur du carré définie dans l'espace de couleurs ci-dessous.</br>
 	Il faut cependant noter que l'ordre des sommets dans la réalisation d'une face importe. Par exemple, essayez d'intervertir les sommets 2 et 3.</br>
 	Vous constatez alors que vous n'observez qu'un triangle, et si vous déplacez la caméra de l'autre côté, vous devriez observer un autre triangle de la face.</br></br>
 
-	Pourquoi obtenez-vous ce résultat? La face f 1 3 2 4 se présente alors ainsi : on tire un trait entre 1 et 3, puis entre 3 et 2, puis entre 2 et 4, et enfin on complète à l'intérieur pour former la face.</br> 
+	Pourquoi obtenez-vous ce résultat? La face f 1 3 2 4 se présente alors ainsi : on tire un trait entre 1 et 3, puis entre 3 et 2, puis entre 2 et 4, et enfin on complète à l'intérieur pour former la face.</br>
 	Alors, si vous visualisez bien la façon dont vous avez agencé les sommets,il est évident que vous avez réalisé un triangle entre 1,3 et 2, et que vous avez ensuite rajouter un triangle opposé 2 1 4.</br>
 	Alors il faut bien comprendre que les faces sont initiallement définies par des triangles : la face (1 2 3 4) est simplement réalisée sur la base des triangles (1 2 3) et (3 4 1).</br>
 	<b>Par conséquent, l'ordre dans lequel vous donnez les sommets est très important</b> : visualisez ceci comme si vous tiriez des traits entre chaque sommet successif, et qu'il n'est alors pas bon de croiser les traits.</br></br>
@@ -35,7 +35,7 @@
 	autrement dit la façon dont la couleur se projète : sur l'intérieur ou sur l'extérieur.</br>
 	Par convention, le sens horaire vous garantit que la lumière se projète vers l'<b>extérieur</b> (ce qui va vous intéresser quand vous allez réalisé une figure complexe), tandis qu'en anti-horaire, elle se projète sur l'<b>intérieur</b>.</br>
 	Alors, la lumière de le triangle (1 3 2) se projète en réalité vers l'intérieur (anti-horaire par rapport à la disposition des sommets), tandis que sur le triangle (2 4 1), la lumière se projète vers l'extérieur !</br>
-	Par conséquent, si vous reprenez la face (1 2 3 4), elle est alors définie dans le sens anti-horaire, et la lumière est donc portée vers l'intérieur.</br> 
+	Par conséquent, si vous reprenez la face (1 2 3 4), elle est alors définie dans le sens anti-horaire, et la lumière est donc portée vers l'intérieur.</br>
 	Une présentation plus juste si vous voulez réaliser un cube serait alors (1 4 3 2)</br></br>
 
 	Si vous avez bien compris cette présentation et que vous comprenez les 2 petits exemples ci-dessous, vous êtes prêts à réaliser des formes simples !</p>
@@ -97,14 +97,14 @@ N'hésitez pas à passer en <b>Wireframe</b> ou en <b>Vertex</b> pour vous aider
 <button id="lumiereSpot" onclick="lumiereSpot()">Lumière spot</button>
 <br>
 <p> L'intensité détermine ici l'<b>intensité</b> de la lumière, celle-ci est normalement à 1 pour les couleurs réelles.</br>
-Dans notre cas nous avons placé cette valeur à 100%, autrement dit la représentation de la couleur entre le cube de couleur et votre figure ne sera la même qu'à cette valeur.</br> 
-Ainsi, si vous vous décalez vers les valeurs faibles, vous irez progressivement vers le noir, tandis qu'en vous décallant vers les 200%,</br> 
+Dans notre cas nous avons placé cette valeur à 100%, autrement dit la représentation de la couleur entre le cube de couleur et votre figure ne sera la même qu'à cette valeur.</br>
+Ainsi, si vous vous décalez vers les valeurs faibles, vous irez progressivement vers le noir, tandis qu'en vous décallant vers les 200%,</br>
 vous obtiendrez une luminosité accrue par rapport à la normale (jusqu'à 2 fois celle de base).</br></br>
 
-Vous avez alors 2 choix pour la projection de la lumière sur votre objet : la lumière ambiante va illuminer <b>toute</b> la scène et ainsi les objets crés,</br>
+Vous avez alors 3 choix pour la projection de la lumière sur votre objet : la lumière ambiante va illuminer <b>toute</b> la scène et ainsi les objets crées,</br>
 tandis que la lumière ponctuelle va illuminer une <b>zone</b> autour d'un point de lumière, ici définit par la sphère de lumière qui s'affiche.</br>
 Le spot définit alors une zone d'éclairage particulière venant éclairer toute une partie de la scène à la manière d'un spot de lumière, appliquant ainsi</br>
-l'effet d'ombre des objets survolés. Il est possible de déplacer le spot, de modifier la distance et l'angle d'éclairage et son intensité afin d'appliquer un éclairage différent sur la scène.</p>
+l'effet d'ombre des objets survolés. Il est possible (non implémenté) de déplacer le spot, de modifier la distance et l'angle d'éclairage et son intensité afin d'appliquer un éclairage différent sur la scène.</p>
 
 <h3>Rotation objet</h3>
 <table>
