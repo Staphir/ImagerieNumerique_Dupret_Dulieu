@@ -11,36 +11,36 @@
 
 <h3>Comment écrire un fichier .obj</h3>
 <div>
-    <p id="texte"> Votre fichier objet va être composé de sommets définis que vous allez relier pour définir des faces.</br>
-        En fonction de l'objet que vous allez créer, il est alors important de définir correctement les sommets et leurs positions dans la scène.</br></br>
+<p id="texte"> Votre fichier objet va être composé de <b>sommets</b> définis que vous allez relier pour définir des <b>faces</b>.</br>
+En fonction de l'objet que vous allez créer, il est alors important de définir correctement les sommets et leurs positions dans la scène.</br></br>
 
-        Les positions des sommets de votre figure sont définies dans l'ordre sur les axes x y et z, autrement dit longueur, hauteur et profondeur.</br>
-        La définition d'un sommet commence toujours par un v (comme vertex), il s'agit de la notation usuelle.</br>
-        Un sommet peut alors s'écrire : v 0 0 0  positionné à la position x=0,y=0 et z=0, autrement dit au centre de la scène.</br></br>
+Les positions des sommets de votre figure sont définies dans l'ordre sur les axes x y et z, autrement dit longueur, hauteur et profondeur.</br>
+La définition d'un sommet commence toujours par un v, il s'agit de la notation usuelle.</br> 
+Un sommet peut alors s'écrire : v 0 0 0  positionné à la position x=0,y=0 et z=0, autrement dit au centre de la scène.</br></br>
 
-        Si vous souhaitez définir la première face d'un cube, il faut d'abord définir les 3 autres sommets pour réaliser une face.</br>
-        Ainsi, les sommets v 0 0 0, v 1 0 0, v 1 1 0 et v 0 1 0 définissent les 4 sommets d'une potentielle face, et dans l'ordre, portent les numéros 1,2,3 et 4.</br>
-        Il suffit alors de donner la face correspondante avec la notation commençant par f : f 1 2 3 4.</br>
-        Vous devriez voir votre face apparaître dans la couleur du carré définie dans l'espace de couleurs ci-dessous.</br>
-        Il faut cependant noter que l'ordre des sommets dans la réalisation d'une face importe. Par exemple, essayez d'intervertir les sommets 2 et 3.</br>
-        Vous constatez alors que vous n'observez qu'un triangle, et si vous déplacez la caméra de l'autre côté, vous devriez observer un autre triangle de la face.</br></br>
+Si vous souhaitez définir la première face d'un cube, il faut d'abord définir les 3 autres sommets pour réaliser une face.</br>
+Ainsi, les sommets v000, v100,v110 et v010 définissent les 4 sommets d'une potentielle face, et dans l'ordre, portent les numéros 1,2,3 et 4.</br>
+Il suffit alors de donner la face correspondante avec la notation commençant par f : f 1 2 3 4.</br> 
+Vous devriez voir votre face apparaître dans la couleur du carré définie dans l'espace de couleurs ci-dessous.</br>
+Il faut cependant noter que l'ordre des sommets dans la réalisation d'une face importe. Par exemple, essayez d'intervertir les sommets 2 et 3.</br>
+Vous constatez alors que vous n'observez qu'un triangle, et si vous déplacez la caméra de l'autre côté, vous devriez observer un autre triangle de la face.</br></br>
 
-        Pourquoi obtenez-vous ce résultat? La face f 1 3 2 4 se présente alors ainsi : on tire un trait entre 1 et 3, puis entre 3 et 2, puis entre 2 et 4, et enfin on complète à l'intérieur pour former la face.</br>
-        Alors, si vous visualisez bien la façon dont vous avez agencé les sommets,il est évident que vous avez réalisé un triangle entre 1,3 et 2, et que vous avez ensuite rajouter un triangle opposé 2 1 4.</br>
-        Alors il faut bien comprendre que les faces sont initiallement définies par des triangles : la face (1 2 3 4) est simplement réalisée sur la base des triangles (1 2 3) et (3 4 1).</br>
-        Par conséquent, l'ordre dans lequel vous donnez les sommets est très important : visualisez ceci comme si vous tiriez des traits entre chaque sommet successif, et qu'il n'est alors pas bon de croiser les traits.</br></br>
+Pourquoi obtenez-vous ce résultat? La face f 1 3 2 4 se présente alors ainsi : on tire un trait entre 1 et 3, puis entre 3 et 2, puis entre 2 et 4, et enfin on complète à l'intérieur pour former la face.</br> 
+Alors, si vous visualisez bien la façon dont vous avez agencé les sommets,il est évident que vous avez réalisé un triangle entre 1,3 et 2, et que vous avez ensuite rajouter un triangle opposé 2 1 4.</br>
+Alors il faut bien comprendre que les faces sont initiallement définies par des triangles : la face (1 2 3 4) est simplement réalisée sur la base des triangles (1 2 3) et (3 4 1).</br>
+<b>Par conséquent, l'ordre dans lequel vous donnez les sommets est très important</b> : visualisez ceci comme si vous tiriez des traits entre chaque sommet successif, et qu'il n'est alors pas bon de croiser les traits.</br></br>
 
-        Par ailleurs, si vous vous demandiez pourquoi la face (1 3 2 4) donnait 2 triangles que vous ne pouviez observer en même temps, sachez que le sens des traits influe le "sens" de la figure,</br>
-        autrement dit la façon dont la couleur se projète : sur l'intérieur ou sur l'extérieur.</br>
-        Par convention, le sens horaire vous garantit que la lumière se projète vers l'extérieur (ce qui va vous intéresser quand vous allez réalisé une figure complexe), tandis qu'en anti-horaire, elle se projète sur l'intérieur.</br>
-        Alors, la lumière de le triangle (1 3 2) se projète en réalité vers l'intérieur (anti-horaire par rapport à la disposition des sommets), tandis que sur le triangle (2 4 1), la lumière se projète vers l'extérieur !</br>
-        Par conséquent, si vous reprenez la face (1 2 3 4), elle est alors définie dans le sens anti-horaire, et la lumière est donc portée vers l'intérieur.</br>
-        Une présentation plus juste si vous voulez réaliser un cube serait alors (1 4 3 2)</br></br>
+Par ailleurs, si vous vous demandiez pourquoi la face (1 3 2 4) donnait 2 triangles que vous ne pouviez observer en même temps, sachez que le sens des traits influe le "sens" de la figure,</br>
+autrement dit la façon dont la couleur se projète : sur l'intérieur ou sur l'extérieur.</br>
+Par convention, le sens horaire vous garantit que la lumière se projète vers l'<b>extérieur</b> (ce qui va vous intéresser quand vous allez réalisé une figure complexe), tandis qu'en anti-horaire, elle se projète sur l'<b>intérieur</b>.</br>
+Alors, la lumière de le triangle (1 3 2) se projète en réalité vers l'intérieur (anti-horaire par rapport à la disposition des sommets), tandis que sur le triangle (2 4 1), la lumière se projète vers l'extérieur !</br>
+Par conséquent, si vous reprenez la face (1 2 3 4), elle est alors définie dans le sens anti-horaire, et la lumière est donc portée vers l'intérieur.</br> 
+Une présentation plus juste si vous voulez réaliser un cube serait alors (1 4 3 2)</br></br>
 
-        Si vous avez bien compris cette présentation et que vous comprenez les 2 petits exemples ci-dessous, vous êtes prêts à réaliser des formes simples !</p>
+Si vous avez bien compris cette présentation et que vous comprenez les 2 petits exemples ci-dessous, vous êtes prêts à réaliser des formes simples !</p>
 </div>
 
-<p>
+<p>Voici quelques exemples :
     <button id="boutonExemplePyramide" onclick="exemplePyramide()">Pyramide</button>
     <button id="boutonExempleCube" onclick="exempleCube()">Cube</button>
 </p>
@@ -55,8 +55,12 @@
 
 <button id="boutonFilled" onclick="transformFilled()">Filled</button>
 <button id="boutonWireframe" onclick="transformWireframe()">Wireframe</button>
-<button id="boutonVertex" onclick="transformVertex()">Vertex (sur l'emplacement original de l'objet)</button>
+<button id="boutonVertex" onclick="transformVertex()">Vertex (sur l'emplacement de original)</button>
 
+<p> <b>Filled</b> donne la figure complète, où chaque face est représentée. C'est la représentation de base quand vous chargez l'objet.</br>
+<b>Wireframe</b> ne montre alors que les arêtes de la figure. Vous avez ainsi le détail de chaque face et la façon dont elles sont tracées.</br>
+Enfin, <b>Vertex</b> ne vous montre que les sommets de votre figure. </br>
+N'hésitez pas à passer en <b>Wireframe</b> ou en <b>Vertex</b> pour vous aider à comprendre les erreurs de votre code !</p>
 
 <h3>Changer la lumière</h3>
 <h4>Choix de la couleur</h4>
@@ -89,7 +93,6 @@
 
 <button id="lumiereAmbiante" onclick="lumiereAmbiante()">Lumière ambiante</button>
 <button id="lumierePonctuelle" onclick="lumierePonctuelle()">Lumière ponctuelle</button>
-<button id="lumiereSpot" onclick="lumiereSpot()">Lumière spot</button>
 <br>
 
 <h3>Rotation objet</h3>
@@ -116,27 +119,6 @@
 </table>
 <button id="rotateobject" onclick="objectToRotate()">Rotation objet</button>
 <button id="stopRotate" onclick="stopRotation()">Arrêt rotation</button>
-
-<h3>Le caractère asynchrone du Javascript</h3>
-<p>
-    Le javascript est un langage asynchrone, c'est-à-dire que le code s'exécute à la suite sans attendre la fin des autres fonctions.
-    Il faut faire attention à cela car une variable peut être indéfinie pour le programme au moment où il veut y accéder seulement parce-que
-    la fonction l'initialisant n'est pas encore fini. Voici deux solutions pour palier à ce problème :
-<ol>
-    <li>
-        Mettre un booléen à "true" quand la variable a été initialisée et attendre que ce booléen soit à "true" avant de lancer
-        la fonction qui a besoin de la variable.
-    </li>
-    <br>
-    <li>
-        Utiliser un setInterval/clearInterval et un try{}catch{}.
-        Le setInterval va permettre de tester toutes les x millisecondes si la variable existe et le clearInterval arrêtera le setInterval une
-        fois la variable initialisée. Le try{}catch{} permettra d'éviter les erreurs. En effet, en mettant la fonction utilisant la variable
-        peut-être initialisée dans le try{}, il n'y aura pas d'erreur si elle n'est pas encore définie, la fonction passera seulement dans le catch{}
-        avant de re-tester x millisecondes après. Il ne faut pas oublier de mettre le clearInterval à la fin du try{}.
-    </li>
-</ol>
-</p>
 
 <script src="js/OBJLoader.js" type="text/javascript"></script>
 <script src="js/TrackballControls.js" type="text/javascript"></script>
