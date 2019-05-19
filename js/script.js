@@ -312,7 +312,7 @@ function positionCamera(){
         try{
             var sphere = scene.children[0].children[0].geometry.boundingSphere;
             //placement de la caméra sur le nouvel objet
-            camera.position.set(sphere.center.x, sphere.center.y, sphere.center.z);
+            camera.position.set(sphere.center.x + sphere.radius, sphere.center.y + sphere.radius, sphere.center.z + sphere.radius);
             //arrêt du setInterval
             clearInterval(idx);
         }catch (e) {
