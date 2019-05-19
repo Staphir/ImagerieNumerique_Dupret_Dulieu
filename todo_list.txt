@@ -1,14 +1,6 @@
-- texte pour expliquer .obj , filled et wireferame, programmation asynchrone...
-
-- recul de la camera en fonction de l'objet
-
-- PAS SUR : rotation camera : vitesse (slider), combien en x, y et z (sliders)
-
 - Déplacement lumière (que certaines lumières et
   pas les deux implémentées (ambient et point))
 
 - meilleur placement sur la page (css pas important)
-
-- placement camera objet (pourquoi seulement quand modification lumière ?)
 
 - quand rotation vertex ne bouge pas car déterminer à partir du .obj

@@ -184,7 +184,7 @@ function inChildren(value){
     }
     return false;
 }
-
+//Retirer toutes les lumières de la scène
 function removeLight(){
     for(let i=0; i<scene.children.length; i++){
         if(scene.children[i].name === "light"){
@@ -193,7 +193,7 @@ function removeLight(){
         }
     }
 }
-
+//Met à jour à chaque fois le type de lumière 
 function mettreAJourLumiere(){
     switch (lumiereActuelle) {
         case "ambient": lumiereAmbiante(); break;
@@ -240,7 +240,7 @@ function mettreAJourCouleurRGB(){
 
 function mettreAJourIntensite(){
     let sliderIntensite = document.getElementById("sliderIntensite");
-    actuelIntensite = 2*sliderIntensite.value/100;
+    actuelIntensite = sliderIntensite.value/100;
     mettreAJourLumiere();
 }
 
