@@ -140,11 +140,31 @@ function lumiereAmbiante(){
 
 function lumierePonctuelle(){
     removeLight();
-    let lumiere = new THREE.PointLight('rgb('+actuelR+','+actuelG+','+actuelB+')', actuelIntensite, 0);
-    lumiere.position.set( -5, 3, 3 );
+    let lumiere = new THREE.PointLight('rgb('+actuelR+','+actuelG+','+actuelB+')', 1, 100);
+    lumiere.position.set( 1, 1, 1.5 );
     // lumiere.intensity = actuelIntensite/100;
     scene.add( lumiere );
     lumiereActuelle = "ponctuelle";
+    lumiere.name = "light";
+    sphereLumierePonctuelle();
+}
+
+function sphereLumierePonctuelle() {
+
+    var geometry = new THREE.SphereGeometry( 0.05, 32, 32 );
+    geometry.translate(1,1,1.5);
+    var material = new THREE.MeshBasicMaterial( {color: 0x888888} );
+    var pointVertex = new THREE.Mesh( geometry, material );
+    scene.add( pointVertex );
+}
+
+function lumiereSpot(){
+    removeLight();
+    let lumiere = new THREE.SpotLight('rgb('+actuelR+','+actuelG+','+actuelB+')');
+    lumiere.position.set( 3, 3, 0 );
+    lumiere.intensity = actuelIntensite/100;
+    scene.add( lumiere );
+    lumiereActuelle = "spot";
     lumiere.name = "light";
 
     //on ne met pas en rotation ce type de lumière
@@ -152,6 +172,7 @@ function lumierePonctuelle(){
     //     addObjRotate(lumiere.name);
     // }
 }
+
 lumiereAmbiante();
 
 //Vérification dans la liste de rotation (que pour certaines lumières)
@@ -174,10 +195,10 @@ function removeLight(){
 }
 
 function mettreAJourLumiere(){
-    if (lumiereActuelle === "ambient"){
-        lumiereAmbiante();
-    }else{
-        lumierePonctuelle();
+    switch (lumiereActuelle) {
+        case "ambient": lumiereAmbiante(); break;
+        case "ponctuelle": lumierePonctuelle(); break;
+        case "spot": lumiereSpot(); break;
     }
 }
 /***************end nouvelle lumière***************************/
@@ -258,6 +279,7 @@ function creerOBJ()
         addObjRotate(object.name);
         //positionner la camera sur le nouvel objet
         positionCamera();
+        mettreAJourIntensite();
         //---stockage des vertex de l'objet-----
         object.children[0].geometry.vertices = [];
         var objVertices = object.children[0].geometry.vertices;
@@ -484,3 +506,8 @@ function animer(){
 animer();
 /*******************end rotation objet*************************************************/
 
+/***************fonctions annexes***********************/
+function indexDernierObjet() {
+    strLastObject = "object_"+(nbObjects-1).toString();
+
+}
