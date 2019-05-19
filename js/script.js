@@ -133,10 +133,28 @@ function creerOBJ()
 
 function selectVertices(objVertices) {
     var splitV = objTexte.value.split("v");
+    var arrayVertexUses = vertexUses();
     for (var i=1; i<splitV.length; i++){
-        var splitCoord = splitV[i].split(" ");
-        objVertices.push(new THREE.Vector3(parseFloat(splitCoord[1]),parseFloat(splitCoord[2]),parseFloat(splitCoord[3])));
+        if(arrayVertexUses.indexOf(i) !== -1){
+            var splitCoord = splitV[i].split(" ");
+            objVertices.push(new THREE.Vector3(parseFloat(splitCoord[1]),parseFloat(splitCoord[2]),parseFloat(splitCoord[3])));
+        }
     }
+}
+
+function vertexUses() {
+    var arrayNumVertexes = [];
+    var splitF = objTexte.value.split("f");
+    for(var i=1; i<splitF.length; i++){
+        var splitNumV = splitF[i].split(" ");
+        console.log(splitNumV);
+        for(var j=1; j<splitNumV.length; j++){
+            arrayNumVertexes.push(parseInt(splitNumV[j]));
+            console.log(splitNumV[j]+"\n"+arrayNumVertexes);
+        }
+    }
+    console.log(arrayNumVertexes);
+    return arrayNumVertexes
 }
 
 function positionCamera(){

@@ -6,7 +6,7 @@
 
 - PAS SUR : rotation camera : vitesse (slider), combien en x, y et z (sliders)
 
-- Vertex
+- Bouton Wireframe + Vertex
 
 - déplacement lumière
 
