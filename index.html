@@ -8,6 +8,7 @@
 </head>
 <body>
 <h1>Scènes 3D</h1>
+
 <h3>Comment écrire un fichier .obj</h3>
 <p>...</p>
 <p>Voici quelques exemples :
@@ -18,12 +19,14 @@
 <div id="container"></div>
 <textarea id="objTexte" cols="40" rows="32"></textarea>
 <br>
+
 <button id="boutonCreerOBJ">Ajouter</button>
 <button id="boutonRemplacerOBJ">Remplacer</button>
 <br><br>
+
 <button id="boutonFilled" onclick="transformFilled()">Filled</button>
 <button id="boutonWireframe" onclick="transformWireframe()">Wireframe</button>
-<button id="boutonVertex" onclick="transformVertex()">Vertex</button>
+<button id="boutonVertex" onclick="transformVertex()">Vertex (sur l'emplacement de original)</button>
 
 
 <h3>Changer la lumière</h3>
@@ -49,13 +52,16 @@
         </td>
     </tr>
 </table>
+
 <i>Intensité:</i>
 <label for="sliderIntensite"></label><input type="range" id="sliderIntensite" min="0" max="100" value="100" />
 <b id="valeurIntensite">100%</b>
 <br>
+
 <button id="lumiereAmbiante" onclick="lumiereAmbiante()">Lumière ambiante</button>
 <button id="lumierePonctuelle" onclick="lumierePonctuelle()">Lumière ponctuelle</button>
 <br>
+
 <h3>Rotation objet</h3>
 <table>
     <tr>
@@ -79,6 +85,7 @@
     </tr>
 </table>
 <button id="rotateobject" onclick="objectToRotate()">Rotation objet</button>
+<button id="stopRotate" onclick="stopRotation()">Arrêt rotation</button>
 
 <script src="js/OBJLoader.js" type="text/javascript"></script>
 <script src="js/TrackballControls.js" type="text/javascript"></script>

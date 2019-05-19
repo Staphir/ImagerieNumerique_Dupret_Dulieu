@@ -18,6 +18,7 @@ let sliderIntensite = document.getElementById("sliderIntensite");
 sliderIntensite.addEventListener("input", changerIntensite);
 
 //-----------------Rotation--------------------------
+let activationRotation = false;
 let listObjToRotate = "";
 
 let actuelleVitesseRotationX = 1;
@@ -68,7 +69,7 @@ camera.position.set(-3, 1, 0);
 let controls = new THREE.TrackballControls( camera, container );
 /************************end Création scene**************************/
 
-/**********************Exemple(s) objet(s)*************************/
+/**********************Exemple objet*************************/
 
 function exemplePyramide() {
     objTexte.value =
@@ -120,7 +121,7 @@ function exempleCube() {
     remplacerOBJ();
 }
 
-/**********************Exemple(s) objet(s)*************************/
+/**********************end Exemple objet*************************/
 
 /**************************nouvelle lumière***************************/
 function lumiereAmbiante(){
@@ -443,6 +444,7 @@ function changerVitesseRotationZ(event) {
 }
 
 function objectToRotate(){
+    activationRotation = true;
     let selectObjRotate = document.getElementById("selectObjRotate");
     listObjToRotate = selectObjRotate.value;
 }
@@ -462,11 +464,19 @@ function avanceRotation(){
     }
 }
 
-// Faire le rendu de la scène à partir de votre caméra
+function stopRotation(){
+    activationRotation = false;
+}
+/***********************end Rotation objet*******************************/
+
+
+/************************rendu de la scène*************************/
 renderer.render( scene, camera );
 function animer(){
-    //modification des coordonnées de l'objet en rotation
-    avanceRotation();
+    if(activationRotation === true){
+        //modification des coordonnées de l'objet en rotation
+        avanceRotation();
+    }
     requestAnimationFrame( animer );
     renderer.render( scene, camera );
     controls.update();
