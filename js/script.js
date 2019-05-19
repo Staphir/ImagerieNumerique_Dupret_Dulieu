@@ -68,6 +68,59 @@ camera.position.set(-3, 1, 0);
 let controls = new THREE.TrackballControls( camera, container );
 /************************end Création scene**************************/
 
+/**********************Exemple(s) objet(s)*************************/
+
+function exemplePyramide() {
+    objTexte.value =
+        "# sommets\n" +
+        "v 0 0 0\n" +
+        "v 1 0 0\n" +
+        "v 1 1 0\n" +
+        "v 0 1 0\n" +
+        "v 1 1 1\n" +
+        "v 1 0 1\n" +
+        "v 0 1 1\n" +
+        "v 0 0 1\n" +
+        "v 0.5 1 0.5\n" +
+        "\n" +
+        "# faces\n" +
+        "f 1 8 2\n" +
+        "f 2 8 6\n" +
+        "f 1 2 9\n" +
+        "f 1 9 8\n" +
+        "f 8 9 6\n" +
+        "f 2 6 9";
+    remplacerOBJ();
+}
+function exempleCube() {
+    objTexte.value =
+        "# sommets\n" +
+        "v 0 0 0\n" +
+        "v 1 0 0\n" +
+        "v 1 1 0\n" +
+        "v 0 1 0\n" +
+        "v 1 1 1\n" +
+        "v 1 0 1\n" +
+        "v 0 1 1\n" +
+        "v 0 0 1\n" +
+        "\n" +
+        "# faces\n" +
+        "f 1 2 4\n" +
+        "f 2 3 4\n" +
+        "f 1 4 8\n" +
+        "f 8 4 7\n" +
+        "f 8 7 6\n" +
+        "f 7 5 6\n" +
+        "f 2 6 5\n" +
+        "f 2 5 3\n" +
+        "f 1 8 2\n" +
+        "f 2 8 6\n" +
+        "f 4 3 5\n" +
+        "f 4 5 7";
+    remplacerOBJ();
+}
+
+/**********************Exemple(s) objet(s)*************************/
 
 /**************************nouvelle lumière***************************/
 function lumiereAmbiante(){
