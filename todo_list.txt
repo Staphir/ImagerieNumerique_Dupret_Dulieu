@@ -4,8 +4,16 @@
 
 - recul de la camera en fonction de l'objet
 
-- rotation camera : vitesse (slider), combien en x, y et z (sliders)
+- PAS SUR : rotation camera : vitesse (slider), combien en x, y et z (sliders)
 
-- revoir lumière ponctuelle (ajout d'autres lumières ?)
+- Bouton Wireframe + Vertex
 
 - déplacement lumière
+
+- meilleur placement sur la page
+
+- voir pour faire que remplacer obj ne supprime pas la lumière
+
+- placement camera objet (pourquoi seulement quand modification lumière ?)
+
+- quand rotation vertex ne bouge pas car déterminer à partir du .obj
