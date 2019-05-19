@@ -85,12 +85,12 @@ function exemplePyramide() {
         "v 0.5 1 0.5\n" +
         "\n" +
         "# faces\n" +
-        "f 1 8 2\n" +
-        "f 2 8 6\n" +
-        "f 1 2 9\n" +
-        "f 1 9 8\n" +
-        "f 8 9 6\n" +
-        "f 2 6 9";
+        "f 6 8 1\n" +
+        "f 1 2 6\n" +
+        "f 1 9 2\n" +
+        "f 8 9 1\n" +
+        "f 6 9 8\n" +
+        "f 2 9 6";
     remplacerOBJ();
 }
 function exempleCube() {
@@ -106,18 +106,18 @@ function exempleCube() {
         "v 0 0 1\n" +
         "\n" +
         "# faces\n" +
-        "f 1 2 4\n" +
-        "f 2 3 4\n" +
-        "f 1 4 8\n" +
-        "f 8 4 7\n" +
-        "f 8 7 6\n" +
-        "f 7 5 6\n" +
-        "f 2 6 5\n" +
-        "f 2 5 3\n" +
-        "f 1 8 2\n" +
-        "f 2 8 6\n" +
-        "f 4 3 5\n" +
-        "f 4 5 7";
+        "f 1 4 3\n" +
+        "f 3 2 1\n" +
+        "f 2 3 5\n" +
+        "f 5 6 2\n" +
+        "f 6 5 7\n" +
+        "f 7 8 6\n" +
+        "f 8 7 4\n" +
+        "f 4 1 8\n" +
+        "f 4 7 5\n" +
+        "f 5 3 4\n" +
+        "f 8 1 2\n" +
+        "f 2 6 8";
     remplacerOBJ();
 }
 
